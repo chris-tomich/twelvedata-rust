@@ -67,6 +67,20 @@ impl ResponseDataFormat {
     }
 }
 
+#[derive(Clone, Copy)]
+pub enum ExchangeType {
+    Stock,
+    Index,
+    Etf,
+}
+
+#[allow(dead_code)]
+#[derive(Builder, Default)]
+pub struct ExchangesParams {
+    #[builder(setter(strip_option))]
+    exchange_type: Option<ExchangeType>,
+}
+
 #[allow(dead_code)]
 #[derive(Builder, Default)]
 pub struct TimeSeriesParams<'a> {
@@ -131,6 +145,10 @@ impl TDRequestBuilder {
         TDRequestBuilder {
             apikey,
         }
+    }
+
+    pub fn exchanges() -> String {
+        format!("/exchanges")
     }
 
     pub fn time_series<'a>(&self, symbol: &'a str, interval: Interval, params: &TimeSeriesParams<'a>) -> String {
