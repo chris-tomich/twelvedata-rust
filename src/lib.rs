@@ -147,7 +147,7 @@ impl TDRequestBuilder {
         }
     }
 
-    pub fn exchanges() -> String {
+    pub fn exchanges(&self) -> String {
         format!("/exchanges")
     }
 
