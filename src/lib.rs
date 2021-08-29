@@ -137,11 +137,11 @@ impl<'a> TimeSeriesParams<'a> {
 const URL_PREFIX: &'static str = "https://api.twelvedata.com/";
 
 pub struct TDRequestBuilder {
-    apikey: &'static str,
+    apikey: String,
 }
 
 impl TDRequestBuilder {
-    pub fn new(apikey: &'static str) -> TDRequestBuilder {
+    pub fn new(apikey: String) -> TDRequestBuilder {
         TDRequestBuilder {
             apikey,
         }
@@ -163,7 +163,7 @@ mod tests {
     #[test]
     fn time_series_test() {
         let params_builder = TimeSeriesParams::default();
-        let request_builder = TDRequestBuilder::new("test_api_key");
+        let request_builder = TDRequestBuilder::new("test_api_key".to_owned());
         let request_uri = request_builder.time_series("AAPL", Interval::Minutes1, &params_builder);
 
         assert_eq!("https://api.twelvedata.com/time_series?symbol=AAPL&interval=1min&apikey=test_api_key", request_uri);
