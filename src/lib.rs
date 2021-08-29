@@ -148,7 +148,7 @@ impl TDRequestBuilder {
     }
 
     pub fn exchanges(&self) -> String {
-        format!("/exchanges")
+        format!("{}/exchanges", URL_PREFIX)
     }
 
     pub fn time_series<'a>(&self, symbol: &'a str, interval: Interval, params: &TimeSeriesParams<'a>) -> String {
